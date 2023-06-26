@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "4161aaf1-e213-4add-84ca-023b3e75641c",
+		"name": "Session07",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5216146"
+	},
+	"item": [
+		{
+			"name": "Request 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Check for Status Code\"]= responseCode.code==200;\r",
+							"tests[\"String match\"]= responseBody.has(\"first_name\");\r",
+							"var jsonRes = JSON.parse(responseBody);\r",
+							"tests[\"Check for Id Lindsay\"]=  jsonRes.data[0].id==7;\r",
+							"\r",
+							"tests[\"Check last name of Michael\"] = jsonRes.data[0].last_name==\"Lawson\";\r",
+							"\r",
+							"pm.environment.set(\"var1\", \"testVar\");\r",
+							"pm.environment.get(\"url01\");\r",
+							"\r",
+							"console.log(pm.globals.get(\"globalURL\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"This is Pre-request Script\", pm.info.requestName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 02",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"This is Pre-request Script\", pm.info.requestName);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"This is Test Script\", pm.info.requestName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/3",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"This is Collection Level Pre-request Script\", pm.info.requestName);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"This is Collection Level Test Script\", pm.info.requestName);"
+				]
+			}
+		}
+	]
+}
